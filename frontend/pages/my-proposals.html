@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Propuestas - Votar por Propuestas</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-hand-thumbs-up"></i> Votar por Propuestas
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="create-proposal.html">Nueva Propuesta</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="my-proposals.html">Mis Propuestas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="profile.html">
+              <i class="bi bi-person-circle"></i> <span id="username-display"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="logout-btn">Salir</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Content -->
+  <section class="py-5">
+    <div class="container">
+      
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Mis Propuestas</h2>
+        <a href="create-proposal.html" class="btn btn-primary">
+          <i class="bi bi-plus-circle"></i> Nueva Propuesta
+        </a>
+      </div>
+      
+      <!-- Proposals -->
+      <div id="proposals-container" class="row">
+        <!-- Proposals will be loaded here -->
+      </div>
+      
+    </div>
+  </section>
+  
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2025 Votar por Propuestas - ITESO</p>
+    </div>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  
+  <script>
+    requireAuth();
+    
+    async function loadMyProposals() {
+      const container = document.getElementById('proposals-container');
+      showLoading(container);
+      
+      try {
+        const data = await getMyProposals();
+        
+        container.innerHTML = '';
+        
+        if (data.proposals.length === 0) {
+          showEmptyMessage(container, 'Aún no has creado ninguna propuesta');
+          return;
+        }
+        
+        data.proposals.forEach(proposal => {
+          const card = createProposalCard(proposal, true);
+          
+          // Event listeners para editar/eliminar
+          const editBtn = card.querySelector('.edit-btn');
+          const deleteBtn = card.querySelector('.delete-btn');
+          
+          if (editBtn) {
+            editBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              window.location.href = `create-proposal.html?id=${proposal._id}`;
+            });
+          }
+          
+          if (deleteBtn) {
+            deleteBtn.addEventListener('click', async (e) => {
+              e.stopPropagation();
+              if (confirm('¿Estás seguro de eliminar esta propuesta?')) {
+                try {
+                  await deleteProposal(proposal._id);
+                  showNotification('Propuesta eliminada', 'success');
+                  loadMyProposals();
+                } catch (error) {
+                  showNotification('Error: ' + error.message, 'danger');
+                }
+              }
+            });
+          }
+          
+          container.appendChild(card);
+        });
+        
+      } catch (error) {
+        container.innerHTML = `
+          <div class="col-12">
+            <div class="alert alert-danger">
+              Error: ${error.message}
+            </div>
+          </div>
+        `;
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', loadMyProposals);
+  </script>
+  
+</body>
+</html>

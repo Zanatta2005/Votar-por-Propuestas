@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle de Propuesta - Votar por Propuestas</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-hand-thumbs-up"></i> Votar por Propuestas
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <div id="auth-buttons" style="display: none;">
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Iniciar Sesión</a>
+            </li>
+          </div>
+          <div id="user-menu" class="d-flex align-items-center" style="display: none !important;">
+            <li class="nav-item">
+              <a class="nav-link" href="create-proposal.html">Nueva Propuesta</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="my-proposals.html">Mis Propuestas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html">
+                <i class="bi bi-person-circle"></i> <span id="username-display"></span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="logout-btn">Salir</a>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Content -->
+  <section class="py-5">
+    <div class="container">
+      
+      <!-- Back Button -->
+      <a href="index.html" class="btn btn-outline-secondary mb-4">
+        <i class="bi bi-arrow-left"></i> Volver
+      </a>
+      
+      <!-- Proposal Detail -->
+      <div id="proposal-container">
+        <!-- Loading -->
+      </div>
+      
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2025 Votar por Propuestas - ITESO</p>
+    </div>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  
+  <script>
+    const proposalId = getUrlParameter('id');
+    let hasVoted = false;
+    
+    if (!proposalId) {
+      window.location.href = 'index.html';
+    }
+    
+    async function loadProposal() {
+      const container = document.getElementById('proposal-container');
+      showLoading(container);
+      
+      try {
+        const data = await getProposalById(proposalId);
+        const proposal = data.proposal;
+        
+        // Verificar si el usuario votó
+        if (isAuthenticated()) {
+          const voteData = await checkUserVote(proposalId);
+          hasVoted = voteData.hasVoted;
+        }
+        
+        const isAuthor = isAuthenticated() && getUser().id === proposal.author._id;
+        
+        container.innerHTML = `
+          <div class="row">
+            <div class="col-lg-8">
+              <img src="${proposal.image}" class="img-fluid rounded mb-4" alt="${proposal.title}">
+              
+              <span class="badge bg-primary mb-2">${proposal.category}</span>
+              <h1 class="mb-3">${proposal.title}</h1>
+              
+              <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-person-circle fs-4 me-2"></i>
+                <div>
+                  <strong>${proposal.author.username}</strong>
+                  <br>
+                  <small class="text-muted">${timeAgo(proposal.createdAt)}</small>
+                </div>
+              </div>
+              
+              <p class="lead">${proposal.description}</p>
+              
+              ${isAuthor ? `
+                <div class="mt-4">
+                  <a href="create-proposal.html?id=${proposal._id}" class="btn btn-primary">
+                    <i class="bi bi-pencil"></i> Editar
+                  </a>
+                  <button class="btn btn-danger" id="delete-btn">
+                    <i class="bi bi-trash"></i> Eliminar
+                  </button>
+                </div>
+              ` : ''}
+            </div>
+            
+            <div class="col-lg-4">
+              <div class="card shadow-sm">
+                <div class="card-body text-center">
+                  <h2 class="display-4" id="vote-count">${proposal.voteCount}</h2>
+                  <p class="text-muted">Votos</p>
+                  
+                  ${isAuthenticated() ? `
+                    <button class="btn btn-lg ${hasVoted ? 'btn-outline-primary' : 'btn-primary'} w-100" id="vote-btn">
+                      <i class="bi bi-hand-thumbs-up${hasVoted ? '-fill' : ''}"></i>
+                      ${hasVoted ? 'Ya votaste' : 'Votar'}
+                    </button>
+                  ` : `
+                    <a href="login.html" class="btn btn-lg btn-primary w-100">
+                      Inicia sesión para votar
+                    </a>
+                  `}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        // Event listeners
+        if (isAuthenticated()) {
+          const voteBtn = document.getElementById('vote-btn');
+          if (voteBtn) {
+            voteBtn.addEventListener('click', handleVote);
+          }
+        }
+        
+        if (isAuthor) {
+          document.getElementById('delete-btn').addEventListener('click', handleDelete);
+        }
+        
+      } catch (error) {
+        container.innerHTML = `
+          <div class="alert alert-danger">
+            Error: ${error.message}
+          </div>
+        `;
+      }
+    }
+    
+    async function handleVote() {
+      const voteBtn = document.getElementById('vote-btn');
+      setButtonLoading(voteBtn, true);
+      
+      try {
+        if (hasVoted) {
+          await unvoteProposal(proposalId);
+          hasVoted = false;
+          showNotification('Voto eliminado', 'info');
+        } else {
+          await voteProposal(proposalId);
+          hasVoted = true;
+          showNotification('¡Voto registrado!', 'success');
+        }
+        
+        loadProposal();
+      } catch (error) {
+        setButtonLoading(voteBtn, false);
+        showNotification(error.message, 'danger');
+      }
+    }
+    
+    async function handleDelete() {
+      if (!confirm('¿Estás seguro de eliminar esta propuesta?')) return;
+      
+      try {
+        await deleteProposal(proposalId);
+        showNotification('Propuesta eliminada', 'success');
+        setTimeout(() => {
+          window.location.href = 'my-proposals.html';
+        }, 1500);
+      } catch (error) {
+        showNotification(error.message, 'danger');
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', loadProposal);
+  </script>
+  
+</body>
+</html>
