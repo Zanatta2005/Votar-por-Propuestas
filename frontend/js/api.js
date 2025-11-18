@@ -2,8 +2,6 @@
  * Funciones para hacer peticiones a la API REST
  */
 
-// ========== AUTH ==========
-
 // Registrar usuario
 async function register(username, email, password) {
   const response = await fetch(ENDPOINTS.register, {
@@ -37,8 +35,6 @@ async function login(email, password) {
   
   return data;
 }
-
-// ========== PROPOSALS ==========
 
 // Obtener todas las propuestas
 async function getProposals(page = 1, search = '', category = '', sort = '-createdAt') {
@@ -123,8 +119,6 @@ async function deleteProposal(id) {
   return data;
 }
 
-// ========== VOTES ==========
-
 // Votar por una propuesta
 async function voteProposal(id) {
   const response = await fetch(ENDPOINTS.vote(id), {
@@ -174,8 +168,6 @@ async function checkUserVote(id) {
   
   return data;
 }
-
-// ========== USERS ==========
 
 // Obtener perfil del usuario
 async function getMyProfile() {

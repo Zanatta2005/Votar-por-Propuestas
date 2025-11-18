@@ -2,8 +2,6 @@
  * Funciones auxiliares para el front-end
  */
 
-// ========== NOTIFICACIONES ==========
-
 // Mostrar notificación (toast)
 function showNotification(message, type = 'info') {
   // Crear elemento de notificación
@@ -45,8 +43,6 @@ function showEmptyMessage(element, message = 'No hay resultados') {
     </div>
   `;
 }
-
-// ========== FORMATEO DE DATOS ==========
 
 // Formatear fecha
 function formatDate(dateString) {
@@ -93,8 +89,6 @@ function truncateText(text, maxLength) {
   return text.substring(0, maxLength) + '...';
 }
 
-// ========== VALIDACIONES ==========
-
 // Validar email
 function isValidEmail(email) {
   const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -106,8 +100,6 @@ function isValidLength(text, min, max) {
   const length = text.trim().length;
   return length >= min && length <= max;
 }
-
-// ========== UI HELPERS ==========
 
 // Crear card de propuesta
 function createProposalCard(proposal, showActions = false) {

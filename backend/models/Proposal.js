@@ -64,17 +64,15 @@ const ProposalSchema = new mongoose.Schema({
   }
 });
 
-/**
- * Middleware: Actualizar updatedAt antes de guardar
- */
+
+// Middleware: Actualizar updatedAt antes de guardar
 ProposalSchema.pre('save', function(next) {
   this.updatedAt = Date.now();
   next();
 });
 
-/**
- * Índices para mejorar performance en búsquedas
- */
+
+// Índices para mejorar performance en búsquedas
 ProposalSchema.index({ title: 'text', description: 'text' });
 ProposalSchema.index({ category: 1 });
 ProposalSchema.index({ voteCount: -1 });

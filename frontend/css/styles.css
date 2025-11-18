@@ -2,7 +2,7 @@
    ESTILOS PERSONALIZADOS - VOTAR POR PROPUESTAS
    ======================================== */
 
-/* === VARIABLES === */
+/* VARIABLES */
 :root {
   --primary-color: #0d6efd;
   --secondary-color: #6c757d;
@@ -18,7 +18,7 @@
   --transition: all 0.3s ease;
 }
 
-/* === GENERAL === */
+/* GENERAL */
 * {
   margin: 0;
   padding: 0;
@@ -37,7 +37,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* === NAVBAR === */
+/* NAVBAR */
 .navbar {
   box-shadow: var(--box-shadow);
 }
@@ -60,7 +60,7 @@ html {
   opacity: 0.8;
 }
 
-/* === CARDS === */
+/* CARDS */
 .card {
   border: none;
   border-radius: var(--border-radius);
@@ -81,7 +81,7 @@ html {
   transform: scale(1.05);
 }
 
-/* === PROPOSAL CARDS === */
+/* PROPOSAL CARDS */
 .proposal-card {
   cursor: pointer;
   height: 100%;
@@ -106,7 +106,7 @@ html {
   font-size: 0.9rem;
 }
 
-/* === BUTTONS === */
+/* BUTTONS */
 .btn {
   font-weight: 500;
   border-radius: var(--border-radius);
@@ -133,14 +133,14 @@ html {
   border-color: #0a58ca;
 }
 
-/* === BADGES === */
+/* BADGES */
 .badge {
   font-weight: 500;
   padding: 0.35rem 0.65rem;
   border-radius: var(--border-radius);
 }
 
-/* === FORMS === */
+/* FORMS */
 .form-control,
 .form-select {
   border-radius: var(--border-radius);
@@ -159,13 +159,13 @@ html {
   border-radius: var(--border-radius);
 }
 
-/* === ALERTS === */
+/* ALERTS */
 .alert {
   border-radius: var(--border-radius);
   border: none;
 }
 
-/* === NOTIFICATIONS (TOAST) === */
+/* NOTIFICATIONS */
 .notification-toast {
   animation: slideInRight 0.3s ease-out;
   max-width: 400px;
@@ -182,7 +182,7 @@ html {
   }
 }
 
-/* === LOADING SPINNER === */
+/* LOADING SPINNER */
 .spinner-border {
   width: 3rem;
   height: 3rem;
@@ -195,7 +195,7 @@ html {
   border-width: 0.15rem;
 }
 
-/* === PAGINATION === */
+/* PAGINATION */
 .pagination {
   margin-top: 2rem;
 }
@@ -222,12 +222,12 @@ html {
   opacity: 0.5;
 }
 
-/* === FOOTER === */
+/* FOOTER */
 footer {
   margin-top: auto;
 }
 
-/* === HERO SECTION === */
+/* HERO SECTION */
 .display-4 {
   font-weight: 700;
 }
@@ -237,7 +237,7 @@ footer {
   font-weight: 300;
 }
 
-/* === IMAGES === */
+/* IMAGES */
 img {
   max-width: 100%;
   height: auto;
@@ -247,7 +247,7 @@ img {
   border-radius: var(--border-radius);
 }
 
-/* === MODALS === */
+/* MODALS */
 .modal-content {
   border-radius: var(--border-radius);
   border: none;
@@ -261,7 +261,7 @@ img {
   border-top: 1px solid #dee2e6;
 }
 
-/* === RESPONSIVE === */
+/* RESPONSIVE */
 
 /* Tablet */
 @media (max-width: 768px) {
@@ -328,7 +328,7 @@ img {
   }
 }
 
-/* === UTILITIES === */
+/* UTILITIES */
 
 /* Hover effects */
 .hover-lift {
@@ -385,7 +385,7 @@ img {
   animation: fadeIn 0.5s ease-out;
 }
 
-/* === CUSTOM SCROLLBAR === */
+/* CUSTOM SCROLLBAR */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -403,7 +403,7 @@ img {
   background: var(--primary-color);
 }
 
-/* === PRINT STYLES === */
+/* PRINT STYLES */
 @media print {
   .navbar,
   .footer,
