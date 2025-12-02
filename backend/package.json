@@ -8,7 +8,7 @@
     "dev": "nodemon server.js"
   },
   "keywords": ["node", "express", "mongodb", "jwt", "rest-api"],
-  "author": "Tu nombre aquí",
+  "author": "Claudio Zanatta Casas",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",

@@ -39,22 +39,22 @@ const UserSchema = new mongoose.Schema({
 });
 
 /**
- * Middleware: Encriptar contraseña antes de guardar
+ * Middleware: Encripta contraseña antes de guardar
  * Se ejecuta automáticamente en .save() y .create()
  */
 UserSchema.pre('save', async function(next) {
-  // Solo encriptar si la contraseña fue modificada
+  // Solo encripta si la contraseña fue modificada
   if (!this.isModified('password')) {
     next();
   }
 
-  // Generar salt y hash
+  // Genera salt y hash
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
 
 /**
- * Método: Generar JWT token
+ * Método: Genera JWT token
  * Uso: user.getSignedJwtToken()
  */
 UserSchema.methods.getSignedJwtToken = function() {

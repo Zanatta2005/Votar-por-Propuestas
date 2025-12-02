@@ -1,4 +1,4 @@
-# 🗳️ Votar por Propuestas
+# Votar por Propuestas
 
 Plataforma web para publicar, votar y gestionar propuestas de proyectos.
 
@@ -7,18 +7,18 @@ ITESO - Otoño 2025
 
 ---
 
-## 📋 Descripción
+## Descripción
 
 Sistema completo de votación de propuestas que permite a los usuarios:
-- ✅ Registrarse e iniciar sesión
-- ✅ Crear y publicar propuestas
-- ✅ Votar por propuestas de otros usuarios
-- ✅ Buscar y filtrar propuestas por categoría
-- ✅ Gestionar su perfil y propuestas
+- Registrarse e iniciar sesión
+- Crear y publicar propuestas
+- Votar por propuestas de otros usuarios
+- Buscar y filtrar propuestas por categoría
+- Gestionar su perfil y propuestas
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 ### **Back-end:**
 - Node.js
@@ -36,7 +36,7 @@ Sistema completo de votación de propuestas que permite a los usuarios:
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 votar-propuestas/
@@ -80,7 +80,7 @@ votar-propuestas/
 
 ---
 
-## 🚀 Instalación y Configuración
+## Instalación y Configuración
 
 ### **Requisitos Previos:**
 - Node.js (v14 o superior)
@@ -135,7 +135,7 @@ Opción B - **Directamente en el navegador:**
 
 ---
 
-## 📡 API REST - Endpoints
+## API REST - Endpoints
 
 ### **Autenticación**
 
@@ -173,7 +173,7 @@ Opción B - **Directamente en el navegador:**
 
 ---
 
-## 🧪 Pruebas con Postman
+## Pruebas con Postman
 
 1. Importar colección de Postman (incluida en el repositorio)
 2. Configurar variable `baseURL`: `http://localhost:3000/api`
@@ -182,7 +182,7 @@ Opción B - **Directamente en el navegador:**
 
 ---
 
-## 🌐 Despliegue (Render)
+## Despliegue (Render)
 
 ### **Back-end:**
 1. Crear cuenta en [Render](https://render.com)
@@ -201,34 +201,34 @@ Opción B - **Directamente en el navegador:**
 
 ---
 
-## ✅ Funcionalidades Implementadas
+## Funcionalidades Implementadas
 
 ### **Back-end:**
-- ✅ API REST completa
-- ✅ Autenticación JWT
-- ✅ Encriptación de contraseñas (bcrypt)
-- ✅ Validaciones de datos
-- ✅ Manejo de errores centralizado
-- ✅ Sistema de votación único (1 voto/usuario)
-- ✅ CRUD completo de propuestas
-- ✅ Búsqueda y filtros
-- ✅ Paginación
+- API REST completa
+- Autenticación JWT
+- Encriptación de contraseñas (bcrypt)
+- Validaciones de datos
+- Manejo de errores centralizado
+- Sistema de votación único (1 voto/usuario)
+- CRUD completo de propuestas
+- Búsqueda y filtros
+- Paginación
 
 ### **Front-end:**
-- ✅ Login/Register
-- ✅ Home con listado de propuestas
-- ✅ Búsqueda y filtros por categoría
-- ✅ Detalle de propuesta con votación
-- ✅ Crear/Editar propuestas
-- ✅ Gestión de mis propuestas
-- ✅ Perfil de usuario
-- ✅ Diseño responsivo (Bootstrap)
-- ✅ Notificaciones (toasts)
-- ✅ Validaciones en formularios
+- Login/Register
+- Home con listado de propuestas
+- Búsqueda y filtros por categoría
+- Detalle de propuesta con votación
+- Crear/Editar propuestas
+- Gestión de mis propuestas
+- Perfil de usuario
+- Diseño responsivo (Bootstrap)
+- Notificaciones (toasts)
+- Validaciones en formularios
 
 ---
 
-## 📝 Categorías Disponibles
+## Categorías Disponibles
 
 - Tecnología
 - Educación
@@ -243,22 +243,22 @@ Opción B - **Directamente en el navegador:**
 
 ---
 
-## 👥 Equipo
+## Equipo
 
-- **Desarrollador:** [Tu Nombre]
+- **Desarrollador:** Claudio Zanatta Casas
 - **Materia:** Desarrollo de Aplicaciones y Servicios Web
 - **Profesor:** Ing. Jorge Barba Ortega
 - **Periodo:** Otoño 2025
 
 ---
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto es parte de un proyecto académico del ITESO.
 
 ---
 
-## 🙏 Agradecimientos
+## Agradecimientos
 
 - ITESO - Universidad Jesuita de Guadalajara
 - Departamento de Electrónica, Sistemas e Informática

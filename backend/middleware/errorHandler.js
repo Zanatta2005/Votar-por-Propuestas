@@ -1,13 +1,10 @@
-/**
- * Middleware de manejo de errores
- * Captura todos los errores y devuelve una respuesta consistente
- */
+//Captura todos los errores y devuelve una respuesta consistente
 const errorHandler = (err, req, res, next) => {
   let error = { ...err };
   error.message = err.message;
 
   // Log del error en consola para debugging
-  console.error('❌ Error:', err);
+  console.error('Error:', err);
 
   // Error de Mongoose: ID no válido (CastError)
   if (err.name === 'CastError') {

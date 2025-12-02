@@ -65,7 +65,7 @@ const ProposalSchema = new mongoose.Schema({
 });
 
 
-// Middleware: Actualizar updatedAt antes de guardar
+// Middleware: Actualiza el updatedAt antes de guardar
 ProposalSchema.pre('save', function(next) {
   this.updatedAt = Date.now();
   next();

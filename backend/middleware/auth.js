@@ -2,19 +2,19 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 /**
- * Middleware: Proteger rutas que requieren autenticación
+ * Middleware: Protege rutas que requieren autenticación
  * Verifica que el token JWT sea válido
  * Uso: router.get('/ruta', protect, controller)
  */
 exports.protect = async (req, res, next) => {
   let token;
 
-  // 1. Verificar si el token existe en los headers
+  // 1. Verifica si el token existe en los headers
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
   ) {
-    // Extraer el token del header "Authorization: Bearer TOKEN"
+    // Extrae el token del header "Authorization: Bearer TOKEN"
     token = req.headers.authorization.split(' ')[1];
   }
 
@@ -27,10 +27,10 @@ exports.protect = async (req, res, next) => {
   }
 
   try {
-    // 3. Verificar que el token sea válido
+    // 3. Verifica que el token sea válido
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // 4. Buscar el usuario en la base de datos
+    // 4. Busca el usuario en la base de datos
     req.user = await User.findById(decoded.id);
 
     if (!req.user) {
@@ -40,7 +40,7 @@ exports.protect = async (req, res, next) => {
       });
     }
 
-    // 5. Continuar a la siguiente función
+    // 5. Continua a la siguiente función
     next();
   } catch (error) {
     return res.status(401).json({
@@ -51,7 +51,7 @@ exports.protect = async (req, res, next) => {
 };
 
 /**
- * Middleware opcional: Obtener usuario si hay token, pero no requerirlo
+ * Middleware opcional: Obtiene el usuario si hay token, pero no requerirlo
  * Útil para rutas que cambian según si el usuario está autenticado o no
  */
 exports.optionalAuth = async (req, res, next) => {

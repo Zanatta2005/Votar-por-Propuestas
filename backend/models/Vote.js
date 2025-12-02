@@ -28,7 +28,7 @@ const VoteSchema = new mongoose.Schema({
 VoteSchema.index({ user: 1, proposal: 1 }, { unique: true });
 
 /**
- * Método estático: Verificar si un usuario ya votó por una propuesta
+ * Método estático: Verifica si un usuario ya votó por una propuesta
  * Uso: await Vote.hasUserVoted(userId, proposalId)
  */
 VoteSchema.statics.hasUserVoted = async function(userId, proposalId) {
@@ -37,7 +37,7 @@ VoteSchema.statics.hasUserVoted = async function(userId, proposalId) {
 };
 
 /**
- * Método estático: Contar votos de una propuesta
+ * Método estático: Cuenta los votos de una propuesta
  * Uso: await Vote.countVotes(proposalId)
  */
 VoteSchema.statics.countVotes = async function(proposalId) {

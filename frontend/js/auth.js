@@ -2,38 +2,38 @@
  * Manejo de autenticación (JWT)
  */
 
-// Guardar token en localStorage
+// Guarda el token en localStorage
 function saveToken(token) {
   localStorage.setItem('token', token);
 }
 
-// Obtener token de localStorage
+// Obtiene el token de localStorage
 function getToken() {
   return localStorage.getItem('token');
 }
 
-// Eliminar token de localStorage
+// Elimina el token de localStorage
 function removeToken() {
   localStorage.removeItem('token');
 }
 
-// Guardar datos del usuario
+// Guarda los datos del usuario
 function saveUser(user) {
   localStorage.setItem('user', JSON.stringify(user));
 }
 
-// Obtener datos del usuario
+// Obtiene los datos del usuario
 function getUser() {
   const user = localStorage.getItem('user');
   return user ? JSON.parse(user) : null;
 }
 
-// Eliminar datos del usuario
+// Elimina los datos del usuario
 function removeUser() {
   localStorage.removeItem('user');
 }
 
-// Verificar si el usuario está autenticado
+// Verifica si el usuario está autenticado
 function isAuthenticated() {
   return getToken() !== null;
 }
@@ -45,21 +45,21 @@ function logout() {
   window.location.href = '/frontend/pages/login.html';
 }
 
-// Redirigir a login si no está autenticado
+// Redirige a login si no está autenticado
 function requireAuth() {
   if (!isAuthenticated()) {
     window.location.href = '/frontend/pages/login.html';
   }
 }
 
-// Redirigir a home si ya está autenticado
+// Redirige a home si ya está autenticado
 function redirectIfAuthenticated() {
   if (isAuthenticated()) {
     window.location.href = '/frontend/pages/index.html';
   }
 }
 
-// Obtener headers con autenticación
+// Obtiene los headers con autenticación
 function getAuthHeaders() {
   const token = getToken();
   return {
@@ -68,7 +68,7 @@ function getAuthHeaders() {
   };
 }
 
-// Actualizar navbar según estado de autenticación
+// Actualiza el navbar según estado de autenticación
 function updateNavbar() {
   const user = getUser();
   const authButtons = document.getElementById('auth-buttons');
@@ -92,7 +92,7 @@ function updateNavbar() {
   }
 }
 
-// Manejar errores de autenticación (401)
+// Maneja los errores de autenticación (401)
 function handleAuthError(error) {
   if (error.status === 401) {
     // Token inválido o expirado
@@ -107,11 +107,11 @@ function handleAuthError(error) {
   return false;
 }
 
-// Inicializar autenticación en cada página
+// Inicializa la autenticación en cada página
 document.addEventListener('DOMContentLoaded', () => {
   updateNavbar();
   
-  // Agregar event listener al botón de logout
+  // Agrega el event listener al botón de logout
   const logoutBtn = document.getElementById('logout-btn');
   if (logoutBtn) {
     logoutBtn.addEventListener('click', (e) => {

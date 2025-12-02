@@ -4,10 +4,10 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 
-// Crear aplicación Express
+// Crea la aplicación Express
 const app = express();
 
-// Conectar a MongoDB
+// Conecta a MongoDB
 connectDB();
 
 // Middleware
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true })); // Para parsear form data
 app.get('/', (req, res) => {
   res.json({
     success: true,
-    message: '🎉 API de Votar por Propuestas funcionando correctamente',
+    message: 'API de Votar por Propuestas funcionando correctamente',
     version: '1.0.0',
     endpoints: {
       auth: '/api/auth',
@@ -62,16 +62,16 @@ app.use((req, res) => {
 // Puerto del servidor
 const PORT = process.env.PORT || 3000;
 
-// Iniciar servidor
+// Inicia el servidor
 const server = app.listen(PORT, () => {
-  console.log(`\n🚀 Servidor corriendo en puerto ${PORT}`);
-  console.log(`📍 URL: http://localhost:${PORT}`);
-  console.log(`🌍 Entorno: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`\n✅ Presiona Ctrl+C para detener el servidor\n`);
+  console.log(`\n Servidor corriendo en puerto ${PORT}`);
+  console.log(`URL: http://localhost:${PORT}`);
+  console.log(`Entorno: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`\n Presiona Ctrl+C para detener el servidor\n`);
 });
 
 // Manejo de promesas no capturadas
 process.on('unhandledRejection', (err) => {
-  console.log('❌ Error no capturado:', err.message);
+  console.log('Error no capturado:', err.message);
   server.close(() => process.exit(1));
 });

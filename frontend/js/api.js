@@ -36,7 +36,7 @@ async function login(email, password) {
   return data;
 }
 
-// Obtener todas las propuestas
+// Obtiene todas las propuestas
 async function getProposals(page = 1, search = '', category = '', sort = '-createdAt') {
   let url = `${ENDPOINTS.proposals}?page=${page}&limit=${PAGINATION.itemsPerPage}`;
   
@@ -54,7 +54,7 @@ async function getProposals(page = 1, search = '', category = '', sort = '-creat
   return data;
 }
 
-// Obtener una propuesta por ID
+// Obtiene una propuesta por ID
 async function getProposalById(id) {
   const response = await fetch(ENDPOINTS.proposalById(id));
   const data = await response.json();
