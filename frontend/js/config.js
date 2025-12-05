@@ -5,7 +5,7 @@
 // URL de la API
 // En desarrollo: localhost:3000
 // En producción: tu-app.onrender.com
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://votar-propuestas-api.onrender.com/api';
 
 // Endpoints
 const ENDPOINTS = {

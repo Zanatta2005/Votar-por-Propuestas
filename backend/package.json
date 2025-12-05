@@ -7,6 +7,9 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
+  "engines": {
+    "node": ">14.0.0"
+  },
   "keywords": ["node", "express", "mongodb", "jwt", "rest-api"],
   "author": "Claudio Zanatta Casas",
   "license": "ISC",
