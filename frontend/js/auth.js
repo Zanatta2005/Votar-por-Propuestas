@@ -100,7 +100,7 @@ function handleAuthError(error) {
     removeUser();
     showNotification('Sesión expirada. Por favor inicia sesión nuevamente.', 'warning');
     setTimeout(() => {
-      window.location.href = '/frontend/pages/login.html';
+      window.location.href = 'login.html';
     }, 2000);
     return true;
   }
