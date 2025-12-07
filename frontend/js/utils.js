@@ -213,4 +213,12 @@ function setButtonLoading(button, loading = true) {
     button.disabled = false;
     button.innerHTML = button.dataset.originalText;
   }
+
+  cardElement.addEventListener('click', (e) => {
+  if (!e.target.closest('button')) {
+    console.log('Proposal ID:', proposal._id);  // ← Agregar esta línea
+    const detailUrl = 'proposal-detail.html?id=' + proposal._id;
+    window.location.href = detailUrl;
+  }
+});
 }
