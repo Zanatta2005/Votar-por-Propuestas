@@ -147,7 +147,7 @@ function createProposalCard(proposal, showActions = false) {
   const cardElement = card.querySelector('.proposal-card');
   cardElement.addEventListener('click', (e) => {
     if (!e.target.closest('button')) {
-      window.location.href = `/frontend/pages/proposal-detail.html?id=${proposal._id}`;
+      window.location.href = `proposal-detail.html?id=${proposal._id}`;
     }
   });
   
