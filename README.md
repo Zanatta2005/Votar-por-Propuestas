@@ -245,7 +245,7 @@ Opción B - **Directamente en el navegador:**
 
 ## Equipo
 
-- **Desarrollador:** Claudio Zanatta Casas
+- **Desarrollador:** Claudio Zanatta Casas - Jorge Arturo Ponce Martin
 - **Materia:** Desarrollo de Aplicaciones y Servicios Web
 - **Profesor:** Ing. Jorge Barba Ortega
 - **Periodo:** Otoño 2025
