@@ -42,20 +42,20 @@ function isAuthenticated() {
 function logout() {
   removeToken();
   removeUser();
-  window.location.href = '/frontend/pages/login.html';
+  window.location.href = './login.html';
 }
 
 // Redirige a login si no está autenticado
 function requireAuth() {
   if (!isAuthenticated()) {
-    window.location.href = '/frontend/pages/login.html';
+    window.location.href = './login.html';
   }
 }
 
 // Redirige a home si ya está autenticado
 function redirectIfAuthenticated() {
   if (isAuthenticated()) {
-    window.location.href = '/frontend/pages/index.html';
+    window.location.href = './index.html';
   }
 }
 
