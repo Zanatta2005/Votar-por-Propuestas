@@ -8,14 +8,14 @@ function showNotification(message, type = 'info') {
   const notification = document.createElement('div');
   notification.className = `alert alert-${type} alert-dismissible fade show notification-toast`;
   notification.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
-  
+
   notification.innerHTML = `
     ${message}
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
   `;
-  
+
   document.body.appendChild(notification);
-  
+
   // Auto-remover después de 5 segundos
   setTimeout(() => {
     notification.remove();
@@ -47,9 +47,9 @@ function showEmptyMessage(element, message = 'No hay resultados') {
 // Formatear fecha
 function formatDate(dateString) {
   const date = new Date(dateString);
-  const options = { 
-    year: 'numeric', 
-    month: 'long', 
+  const options = {
+    year: 'numeric',
+    month: 'long',
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit'
@@ -62,7 +62,7 @@ function timeAgo(dateString) {
   const date = new Date(dateString);
   const now = new Date();
   const seconds = Math.floor((now - date) / 1000);
-  
+
   const intervals = {
     año: 31536000,
     mes: 2592000,
@@ -72,14 +72,14 @@ function timeAgo(dateString) {
     minuto: 60,
     segundo: 1
   };
-  
+
   for (const [name, secondsInInterval] of Object.entries(intervals)) {
     const interval = Math.floor(seconds / secondsInInterval);
     if (interval >= 1) {
       return `Hace ${interval} ${name}${interval > 1 ? 's' : ''}`;
     }
   }
-  
+
   return 'Justo ahora';
 }
 
@@ -105,7 +105,7 @@ function isValidLength(text, min, max) {
 function createProposalCard(proposal, showActions = false) {
   const card = document.createElement('div');
   card.className = 'col-md-6 col-lg-4 mb-4';
-  
+
   const actionsHTML = showActions && isAuthenticated() ? `
     <div class="card-footer bg-transparent border-top-0">
       <div class="d-flex justify-content-between">
@@ -118,7 +118,7 @@ function createProposalCard(proposal, showActions = false) {
       </div>
     </div>
   ` : '';
-  
+
   card.innerHTML = `
     <div class="card h-100 shadow-sm proposal-card" style="cursor: pointer;">
       <img src="${proposal.image || 'https://via.placeholder.com/400x200'}" 
@@ -142,15 +142,16 @@ function createProposalCard(proposal, showActions = false) {
       ${actionsHTML}
     </div>
   `;
-  
+
   // Click en la card para ver detalle (excepto en botones)
   const cardElement = card.querySelector('.proposal-card');
   cardElement.addEventListener('click', (e) => {
     if (!e.target.closest('button')) {
-      window.location.href = `proposal-detail.html?id=${proposal._id}`;
+      const detailUrl = 'proposal-detail.html?id=' + proposal._id;
+      window.location.href = detailUrl;
     }
   });
-  
+
   return card;
 }
 
@@ -163,17 +164,22 @@ function createPagination(currentPage, totalPages, onPageChange) {
         <a class="page-link" href="#" data-page="${currentPage - 1}">Anterior</a>
       </li>
       ${Array.from({ length: totalPages }, (_, i) => i + 1)
-        .map(page => `
-          <li class="page-item ${page === currentPage ? 'active' : ''}">
-            <a class="page-link" href="#" data-page="${page}">${page}</a>
-          </li>
-        `).join('')}
+        .map(page => ` <
+    li class = "page-item ${page === currentPage ? 'active' : ''}" >
+    <
+    a class = "page-link"
+  href = "#"
+  data - page = "${page}" > $ {
+      page
+    } < /a> <
+    /li>
+  `).join('')}
       <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
         <a class="page-link" href="#" data-page="${currentPage + 1}">Siguiente</a>
       </li>
     </ul>
   `;
-  
+
   // Event listeners para la paginación
   pagination.querySelectorAll('.page-link').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -184,7 +190,7 @@ function createPagination(currentPage, totalPages, onPageChange) {
       }
     });
   });
-  
+
   return pagination;
 }
 
